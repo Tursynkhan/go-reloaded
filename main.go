@@ -9,17 +9,15 @@ import (
 
 func main() {
 	arg := os.Args[1]
-	file, err := os.Open(arg)
+	file1, err := os.Open(arg)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
+	defer file1.Close()
 
-	if scanner.Err() != nil {
-		log.Fatal(scanner.Err())
+	scanner := bufio.NewScanner(file1)
+	for scanner.Scan() {
+		str := (scanner.Text())
+		fmt.Println(str)
 	}
 }
