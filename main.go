@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -64,7 +63,6 @@ func Up(str string) {
 			word = append(word[:i], word[i+2:]...)
 		}
 	}
-	// str = strings.Join(word, " ")
 }
 
 func Low(str string) {
@@ -85,7 +83,6 @@ func Low(str string) {
 			word = append(word[:i], word[i+2:]...)
 		}
 	}
-	// str = strings.Join(word, " ")
 }
 
 func Cap(str string) {
@@ -106,8 +103,6 @@ func Cap(str string) {
 			word = append(word[:i], word[i+2:]...)
 		}
 	}
-	fmt.Println(word)
-	// str = strings.Join(word, " ")
 }
 
 func Hex(str string) {
@@ -120,7 +115,6 @@ func Hex(str string) {
 			word = append(word[:i], word[i+1:]...)
 		}
 	}
-	// str = strings.Join(word, " ")
 }
 
 func Bin(str string) {
@@ -133,6 +127,4 @@ func Bin(str string) {
 			word = append(word[:i], word[i+1:]...)
 		}
 	}
-	// str = strings.Join(word, " ")
-	// fmt.Println(word)
 }
