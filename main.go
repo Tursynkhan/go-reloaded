@@ -10,8 +10,11 @@ import (
 )
 
 func main() {
-	arg := os.Args[1]
-	file1, err := os.Open(arg)
+	arg := os.Args[1:]
+	if len(arg) != 2 {
+		return
+	}
+	file1, err := os.Open(arg[0])
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,6 +31,19 @@ func main() {
 	Cap(&str)
 	Hex(&str)
 	Bin(&str)
+
+	file2, err := os.Create(arg[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	l, err := file2.WriteString(str)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if l == 0 {
+		return
+	}
+	defer file2.Close()
 }
 
 func Up(str *string) {
