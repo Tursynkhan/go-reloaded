@@ -26,11 +26,11 @@ func main() {
 		str += scanner.Text()
 	}
 
-	Up(&str)
-	Low(&str)
-	Cap(&str)
-	Hex(&str)
-	Bin(&str)
+	Up(str)
+	Low(str)
+	Cap(str)
+	Hex(str)
+	Bin(str)
 
 	file2, err := os.Create(arg[1])
 	if err != nil {
@@ -46,41 +46,72 @@ func main() {
 	defer file2.Close()
 }
 
-func Up(str *string) {
-	word := strings.Fields(*str)
+func Up(str string) {
+	word := strings.Fields(str)
 	for i := 0; i < len(word); i++ {
 		if word[i] == "(up)" {
 			word[i-1] = strings.ToUpper(word[i-1])
 			word = append(word[:i], word[i+1:]...)
 		}
+		if word[i] == "(up," {
+			num := word[i+1][:len(word[i+1])-1]
+			n, _ := strconv.Atoi(num)
+			counter := 0
+			for j := i - 1; counter != n; j-- {
+				word[j] = strings.ToUpper(word[j])
+				counter++
+			}
+			word = append(word[:i], word[i+2:]...)
+		}
 	}
-	*str = strings.Join(word, " ")
+	// str = strings.Join(word, " ")
 }
 
-func Low(str *string) {
-	word := strings.Fields(*str)
+func Low(str string) {
+	word := strings.Fields(str)
 	for i := 0; i < len(word); i++ {
 		if word[i] == "(low)" {
 			word[i-1] = strings.ToLower(word[i-1])
 			word = append(word[:i], word[i+1:]...)
 		}
+		if word[i] == "(low," {
+			num := word[i+1][:len(word[i+1])-1]
+			n, _ := strconv.Atoi(num)
+			counter := 0
+			for j := i - 1; counter != n; j-- {
+				word[j] = strings.ToUpper(word[j])
+				counter++
+			}
+			word = append(word[:i], word[i+2:]...)
+		}
 	}
-	*str = strings.Join(word, " ")
+	// str = strings.Join(word, " ")
 }
 
-func Cap(str *string) {
-	word := strings.Fields(*str)
+func Cap(str string) {
+	word := strings.Fields(str)
 	for i := 0; i < len(word); i++ {
 		if word[i] == "(cap)" {
 			word[i-1] = strings.Title(word[i-1])
 			word = append(word[:i], word[i+1:]...)
 		}
+		if word[i] == "(cap," {
+			num := word[i+1][:len(word[i+1])-1]
+			n, _ := strconv.Atoi(num)
+			counter := 0
+			for j := i - 1; counter != n; j-- {
+				word[j] = strings.ToUpper(word[j])
+				counter++
+			}
+			word = append(word[:i], word[i+2:]...)
+		}
 	}
-	*str = strings.Join(word, " ")
+	fmt.Println(word)
+	// str = strings.Join(word, " ")
 }
 
-func Hex(str *string) {
-	word := strings.Fields(*str)
+func Hex(str string) {
+	word := strings.Fields(str)
 	for i := 0; i < len(word); i++ {
 		if word[i] == "(hex)" {
 			decimal, _ := strconv.ParseInt(word[i-1], 16, 64)
@@ -89,11 +120,11 @@ func Hex(str *string) {
 			word = append(word[:i], word[i+1:]...)
 		}
 	}
-	*str = strings.Join(word, " ")
+	// str = strings.Join(word, " ")
 }
 
-func Bin(str *string) {
-	word := strings.Fields(*str)
+func Bin(str string) {
+	word := strings.Fields(str)
 	for i := 0; i < len(word); i++ {
 		if word[i] == "(bin)" {
 			decimal, _ := strconv.ParseInt(word[i-1], 2, 64)
@@ -102,6 +133,6 @@ func Bin(str *string) {
 			word = append(word[:i], word[i+1:]...)
 		}
 	}
-	*str = strings.Join(word, " ")
-	fmt.Println(word)
+	// str = strings.Join(word, " ")
+	// fmt.Println(word)
 }
