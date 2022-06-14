@@ -2,17 +2,32 @@ package main
 
 import (
 	"bufio"
+	"fmt"
+	"go-reloaded/funcBin"
+	"go-reloaded/funcCap"
+	"go-reloaded/funcHex"
+	"go-reloaded/funcLow"
+	"go-reloaded/funcUp"
 	"log"
 	"os"
-	"strconv"
-	"strings"
 )
 
 func main() {
 	arg := os.Args[1:]
+
 	if len(arg) != 2 {
+		fmt.Println("Chech numbers of arguments")
 		return
 	}
+	if arg[0] != "sample.txt" {
+		fmt.Println("the name of the input file that should be sample.txt")
+		return
+	}
+	if arg[1] != "result.txt" {
+		fmt.Println("the name of the input file that should be result.txt")
+		return
+	}
+
 	file1, err := os.Open(arg[0])
 	if err != nil {
 		log.Fatal(err)
@@ -25,11 +40,11 @@ func main() {
 		str += scanner.Text()
 	}
 
-	Up(str)
-	Low(str)
-	Cap(str)
-	Hex(str)
-	Bin(str)
+	str = funcUp.Up(str)
+	str = funcLow.Low(str)
+	str = funcCap.Cap(str)
+	str = funcHex.Hex(str)
+	str = funcBin.Bin(str)
 
 	file2, err := os.Create(arg[1])
 	if err != nil {
@@ -43,88 +58,4 @@ func main() {
 		return
 	}
 	defer file2.Close()
-}
-
-func Up(str string) {
-	word := strings.Fields(str)
-	for i := 0; i < len(word); i++ {
-		if word[i] == "(up)" {
-			word[i-1] = strings.ToUpper(word[i-1])
-			word = append(word[:i], word[i+1:]...)
-		}
-		if word[i] == "(up," {
-			num := word[i+1][:len(word[i+1])-1]
-			n, _ := strconv.Atoi(num)
-			counter := 0
-			for j := i - 1; counter != n; j-- {
-				word[j] = strings.ToUpper(word[j])
-				counter++
-			}
-			word = append(word[:i], word[i+2:]...)
-		}
-	}
-}
-
-func Low(str string) {
-	word := strings.Fields(str)
-	for i := 0; i < len(word); i++ {
-		if word[i] == "(low)" {
-			word[i-1] = strings.ToLower(word[i-1])
-			word = append(word[:i], word[i+1:]...)
-		}
-		if word[i] == "(low," {
-			num := word[i+1][:len(word[i+1])-1]
-			n, _ := strconv.Atoi(num)
-			counter := 0
-			for j := i - 1; counter != n; j-- {
-				word[j] = strings.ToUpper(word[j])
-				counter++
-			}
-			word = append(word[:i], word[i+2:]...)
-		}
-	}
-}
-
-func Cap(str string) {
-	word := strings.Fields(str)
-	for i := 0; i < len(word); i++ {
-		if word[i] == "(cap)" {
-			word[i-1] = strings.Title(word[i-1])
-			word = append(word[:i], word[i+1:]...)
-		}
-		if word[i] == "(cap," {
-			num := word[i+1][:len(word[i+1])-1]
-			n, _ := strconv.Atoi(num)
-			counter := 0
-			for j := i - 1; counter != n; j-- {
-				word[j] = strings.ToUpper(word[j])
-				counter++
-			}
-			word = append(word[:i], word[i+2:]...)
-		}
-	}
-}
-
-func Hex(str string) {
-	word := strings.Fields(str)
-	for i := 0; i < len(word); i++ {
-		if word[i] == "(hex)" {
-			decimal, _ := strconv.ParseInt(word[i-1], 16, 64)
-
-			word[i-1] = strconv.Itoa(int(decimal))
-			word = append(word[:i], word[i+1:]...)
-		}
-	}
-}
-
-func Bin(str string) {
-	word := strings.Fields(str)
-	for i := 0; i < len(word); i++ {
-		if word[i] == "(bin)" {
-			decimal, _ := strconv.ParseInt(word[i-1], 2, 64)
-
-			word[i-1] = strconv.Itoa(int(decimal))
-			word = append(word[:i], word[i+1:]...)
-		}
-	}
 }
