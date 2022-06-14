@@ -7,6 +7,7 @@ import (
 	"go-reloaded/funcCap"
 	"go-reloaded/funcHex"
 	"go-reloaded/funcLow"
+	"go-reloaded/funcPunctuations"
 	"go-reloaded/funcUp"
 	"log"
 	"os"
@@ -45,6 +46,7 @@ func main() {
 	str = funcCap.Cap(str)
 	str = funcHex.Hex(str)
 	str = funcBin.Bin(str)
+	str = funcPunctuations.Punctuations(str)
 
 	file2, err := os.Create(arg[1])
 	if err != nil {
