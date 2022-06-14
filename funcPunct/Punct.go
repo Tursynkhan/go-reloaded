@@ -1,11 +1,11 @@
-package funcPunctuations
+package funcPunct
 
 import (
 	"fmt"
 	"strings"
 )
 
-func Punctuations(str string) string {
+func Punct(str string) string {
 	slice := strings.Fields(str)
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" {
