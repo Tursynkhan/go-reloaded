@@ -27,6 +27,7 @@ func Punct(str string) string {
 			continue
 		}
 	}
+	// Deletes empty element from slice
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "" {
 			slice = append(slice[:i], slice[i+1:]...)

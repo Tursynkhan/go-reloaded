@@ -15,7 +15,7 @@ func Low(str string) string {
 			slice = append(slice[:i], slice[i+1:]...)
 		}
 		if slice[i] == "(low," {
-			num := slice[i+1][:len(slice[i+1])-1]
+			num := string(slice[i+1][0])
 			n, err := strconv.Atoi(num)
 			if err != nil {
 				fmt.Println("Cannot convert number")

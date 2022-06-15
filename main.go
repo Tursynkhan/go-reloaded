@@ -13,6 +13,7 @@ import (
 	"go-reloaded/funcUp"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -42,7 +43,11 @@ func main() {
 	for scanner.Scan() {
 		str += scanner.Text()
 	}
-
+	if strings.HasPrefix(str, "(bin") || strings.HasPrefix(str, "(hex") || strings.HasPrefix(str, "(cap") || strings.HasPrefix(str, "(low") || strings.HasPrefix(str, "(up") {
+		fmt.Println("Don't play with sample.txt")
+		return
+	}
+	str = strings.Trim(str, " ")
 	str = funcUp.Up(str)
 	str = funcLow.Low(str)
 	str = funcCap.Cap(str)
