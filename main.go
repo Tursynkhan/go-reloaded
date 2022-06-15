@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	funcArticels "go-reloaded/funcArticles"
+	"go-reloaded/funcArticles"
 	"go-reloaded/funcBin"
 	"go-reloaded/funcCap"
 	"go-reloaded/funcHex"
@@ -51,7 +51,7 @@ func main() {
 	str = funcPunct.Punct(str)
 	str = funcQuotes.SingleQuotes(str)
 	str = funcQuotes.DoubleQuotes(str)
-	str = funcArticels.Articles(str)
+	str = funcArticles.Articles(str)
 
 	file2, err := os.Create(arg[1])
 	if err != nil {

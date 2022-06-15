@@ -1,4 +1,4 @@
-package funcArticels
+package funcArticles
 
 import "strings"
 
