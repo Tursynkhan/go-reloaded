@@ -23,12 +23,13 @@ func main() {
 		fmt.Println("Chech numbers of arguments")
 		return
 	}
-	if arg[0] != "sample.txt" {
-		fmt.Println("the name of the input file that should be sample.txt")
+
+	if arg[1] == "main.go" || arg[1] == "go.mod" {
+		fmt.Println("Name of the output file should be different from existing files")
 		return
 	}
-	if arg[1] != "result.txt" {
-		fmt.Println("the name of the input file that should be result.txt")
+	if strings.HasPrefix(arg[1], ".go") {
+		fmt.Println("Do not change go files")
 		return
 	}
 
@@ -39,24 +40,31 @@ func main() {
 	defer file1.Close()
 
 	var str string
+	var strSlice []string
 	scanner := bufio.NewScanner(file1)
 	for scanner.Scan() {
-		str += scanner.Text()
+		strSlice = append(strSlice, scanner.Text())
+	}
+	for i, w := range strSlice {
+		if i >= 1 && i <= len(strSlice)-1 {
+			str = str + "\n"
+		}
+		str = str + w
 	}
 	if strings.HasPrefix(str, "(bin") || strings.HasPrefix(str, "(hex") || strings.HasPrefix(str, "(cap") || strings.HasPrefix(str, "(low") || strings.HasPrefix(str, "(up") {
 		fmt.Println("Don't play with sample.txt")
 		return
 	}
 	str = strings.Trim(str, " ")
-	str = funcUp.Up(str)
-	str = funcLow.Low(str)
-	str = funcCap.Cap(str)
-	str = funcHex.Hex(str)
-	str = funcBin.Bin(str)
 	str = funcPunct.Punct(str)
 	str = funcQuotes.SingleQuotes(str)
 	str = funcQuotes.DoubleQuotes(str)
 	str = funcArticles.Articles(str)
+	str = funcHex.Hex(str)
+	str = funcBin.Bin(str)
+	str = funcUp.Up(str)
+	str = funcLow.Low(str)
+	str = funcCap.Cap(str)
 
 	file2, err := os.Create(arg[1])
 	if err != nil {

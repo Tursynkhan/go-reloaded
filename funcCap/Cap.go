@@ -8,7 +8,7 @@ import (
 )
 
 func Cap(str string) string {
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "(cap)" {
 			slice[i-1] = strings.Title(slice[i-1])
@@ -30,8 +30,10 @@ func Cap(str string) string {
 			for j := i - 1; counter != n; j-- {
 				slice[j] = strings.Title(slice[j])
 				counter++
+				i--
 			}
 			slice = append(slice[:i], slice[i+2:]...)
+
 		}
 	}
 

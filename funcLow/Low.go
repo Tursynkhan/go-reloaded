@@ -8,7 +8,7 @@ import (
 )
 
 func Low(str string) string {
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "(low)" {
 			slice[i-1] = strings.ToLower(slice[i-1])
@@ -31,6 +31,7 @@ func Low(str string) string {
 				counter++
 			}
 			slice = append(slice[:i], slice[i+2:]...)
+			i--
 		}
 	}
 	return strings.Join(slice, " ")
