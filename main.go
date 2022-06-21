@@ -23,6 +23,7 @@ func main() {
 		fmt.Println("Check numbers of arguments")
 		return
 	}
+
 	if arg[0] == "main.go" || arg[0] == "go.mod" || arg[1] == "main.go" || arg[1] == "go.mod" {
 		fmt.Println("Name of the output file should be different from existing files")
 		return
@@ -58,15 +59,7 @@ func main() {
 		}
 		str = str + w
 	}
-	for i, w := range strSlice {
-		if i >= 1 && i <= len(strSlice)-1 {
-			str = str + "\n"
-		}
-		str = str + w
-	}
-
 	slice := strings.Split(str, " ")
-
 	for i := 0; i < len(slice); i++ {
 		switch slice[i] {
 		case "(up)":
@@ -86,9 +79,11 @@ func main() {
 		case "(bin)":
 			str = funcBin.Bin(str)
 		}
-		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" || slice[i] == "..." || slice[i] == "?!" {
+		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" || slice[i] == "..." || slice[i] == "?!" && (slice[i][1] == 46 || slice[i][1] == 44 || slice[i][1] == 33 || slice[i][1] == 63 || slice[i][1] == 58 ||
+			slice[i][1] == 59) {
 			str = funcPunct.Punct(str)
 		}
+
 		if (slice[i] == "a" || slice[i] == "A") && (slice[i+1][0] == 'a' || slice[i+1][0] == 'e' || slice[i+1][0] == 'y' || slice[i+1][0] == 'u' || slice[i+1][0] == 'i' || slice[i+1][0] == 'o' || slice[i+1][0] == 'h') {
 			str = funcArticles.Articles(str)
 		}
@@ -96,8 +91,8 @@ func main() {
 			str = funcQuotes.SingleQuotes(str)
 			str = funcQuotes.DoubleQuotes(str)
 		}
-
 	}
+
 	file2, err := os.Create(arg[1])
 	if err != nil {
 		log.Fatal(err)
