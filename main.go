@@ -23,7 +23,6 @@ func main() {
 		fmt.Println("Check numbers of arguments")
 		return
 	}
-
 	if arg[0] == "main.go" || arg[0] == "go.mod" || arg[1] == "main.go" || arg[1] == "go.mod" {
 		fmt.Println("Name of the output file should be different from existing files")
 		return
@@ -52,6 +51,12 @@ func main() {
 	scanner := bufio.NewScanner(file1)
 	for scanner.Scan() {
 		strSlice = append(strSlice, scanner.Text())
+	}
+	for i, w := range strSlice {
+		if i >= 1 && i <= len(strSlice)-1 {
+			str = str + "\n"
+		}
+		str = str + w
 	}
 	for i, w := range strSlice {
 		if i >= 1 && i <= len(strSlice)-1 {
@@ -93,7 +98,6 @@ func main() {
 		}
 
 	}
-
 	file2, err := os.Create(arg[1])
 	if err != nil {
 		log.Fatal(err)

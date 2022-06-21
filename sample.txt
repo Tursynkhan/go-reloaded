@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 sdgdgg (cap)
+=======
+asdfdsaf asdfasdf asdfsadf (cap, 3) (up, 2)
+>>>>>>> e6ce0179b196f1119f298ea4956df023c5ff7d2c
