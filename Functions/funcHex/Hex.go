@@ -6,8 +6,13 @@ import (
 )
 
 func Hex(str string) string {
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
 	for i := 0; i < len(slice); i++ {
+		if len(slice) == 1 {
+			if slice[i] == "(hex)" {
+				slice[i] = ""
+			}
+		}
 		if slice[i] == "(hex)" {
 			decimal, _ := strconv.ParseInt(slice[i-1], 16, 64)
 

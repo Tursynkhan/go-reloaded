@@ -1,6 +1,8 @@
 package funcQuotes
 
-import "strings"
+import (
+	"strings"
+)
 
 func SingleQuotes(str string) string {
 	var r []rune = []rune(str)
@@ -14,7 +16,13 @@ func SingleQuotes(str string) string {
 	}
 	str = s
 
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
+	for i := 0; i < len(slice); i++ {
+		if slice[i] == "" {
+			slice = append(slice[:i], slice[i+1:]...)
+			i--
+		}
+	}
 	var flag bool
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "'" && !flag {
@@ -33,6 +41,7 @@ func SingleQuotes(str string) string {
 			i--
 		}
 	}
+
 	return strings.Join(slice, " ")
 }
 
@@ -48,7 +57,14 @@ func DoubleQuotes(str string) string {
 	}
 	str = s
 
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
+
+	for i := 0; i < len(slice); i++ {
+		if slice[i] == "" {
+			slice = append(slice[:i], slice[i+1:]...)
+			i--
+		}
+	}
 	var flag bool
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "\"" && !flag {
