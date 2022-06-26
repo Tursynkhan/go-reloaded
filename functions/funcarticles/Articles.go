@@ -3,7 +3,7 @@ package funcarticles
 import "strings"
 
 func Articles(str string) string {
-	slice := strings.Fields(str)
+	slice := strings.Split(str, " ")
 
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == slice[len(slice)-1] {
