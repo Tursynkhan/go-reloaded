@@ -53,13 +53,8 @@ func main() {
 	for scanner.Scan() {
 		strSlice = append(strSlice, scanner.Text())
 	}
-	for i, w := range strSlice {
-		if i >= 1 && i <= len(strSlice)-1 {
-			str = str + "\n"
-		}
-		str = str + w
-	}
-	slice := strings.Split(str, " ")
+	str = strings.Join(strSlice, "\n")
+	slice := strings.Fields(str)
 	for i := 0; i < len(slice); i++ {
 		switch slice[i] {
 		case "(up)":
@@ -79,8 +74,8 @@ func main() {
 		case "(bin)":
 			str = funcBin.Bin(str)
 		}
-		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" || slice[i] == "..." || slice[i] == "?!" && (slice[i][1] == 46 || slice[i][1] == 44 || slice[i][1] == 33 || slice[i][1] == 63 || slice[i][1] == 58 ||
-			slice[i][1] == 59) {
+		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" || slice[i] == "..." || slice[i] == "?!" && (slice[i][0] == 46 || slice[i][0] == 44 || slice[i][0] == 33 || slice[i][0] == 63 || slice[i][0] == 58 ||
+			slice[i][0] == 59) {
 			str = funcPunct.Punct(str)
 		}
 

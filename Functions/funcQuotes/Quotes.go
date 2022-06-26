@@ -16,13 +16,13 @@ func SingleQuotes(str string) string {
 	}
 	str = s
 
-	slice := strings.Split(str, " ")
-	for i := 0; i < len(slice); i++ {
-		if slice[i] == "" {
-			slice = append(slice[:i], slice[i+1:]...)
-			i--
-		}
-	}
+	slice := strings.Fields(str)
+	// 	for i := 0; i < len(slice); i++ {
+	// 	if slice[i] == "" {
+	// 		slice = append(slice[:i], slice[i+1:]...)
+	// 		i--
+	// 	}
+	// }
 	var flag bool
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "'" && !flag {
@@ -57,14 +57,13 @@ func DoubleQuotes(str string) string {
 	}
 	str = s
 
-	slice := strings.Split(str, " ")
-
-	for i := 0; i < len(slice); i++ {
-		if slice[i] == "" {
-			slice = append(slice[:i], slice[i+1:]...)
-			i--
-		}
-	}
+	slice := strings.Fields(str)
+	// for i := 0; i < len(slice); i++ {
+	// 	if slice[i] == "" {
+	// 		slice = append(slice[:i], slice[i+1:]...)
+	// 		i--
+	// 	}
+	// }
 	var flag bool
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "\"" && !flag {

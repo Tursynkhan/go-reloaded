@@ -5,7 +5,7 @@ import (
 )
 
 func Punct(str string) string {
-	slice := strings.Split(str, " ")
+	slice := strings.Fields(str)
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "," || slice[i] == "." || slice[i] == "!" || slice[i] == "?" || slice[i] == ":" || slice[i] == ";" {
 			slice[i-1] = slice[i-1] + slice[i]
