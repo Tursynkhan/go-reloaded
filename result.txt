@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Don not be sad, because sad backwards IS DAS. AND das not good
+=======
+I have to pack 5 outfits. Packed 26 just to be sure
+>>>>>>> audit-d0ssan
