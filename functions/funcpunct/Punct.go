@@ -1,4 +1,4 @@
-package funcPunct
+package funcpunct
 
 import (
 	"strings"

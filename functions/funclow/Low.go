@@ -1,4 +1,4 @@
-package funcCap
+package funclow
 
 import (
 	"fmt"
@@ -7,20 +7,20 @@ import (
 	"strings"
 )
 
-func Cap(str string) string {
+func Low(str string) string {
 	slice := strings.Fields(str)
 	for i := 0; i < len(slice); i++ {
 		if len(slice) == 1 {
-			if slice[i] == "(cap)" {
+			if slice[i] == "(low)" {
 				slice[i] = ""
 			}
 		}
-		if slice[i] == "(cap)" {
-			slice[i-1] = strings.Title(slice[i-1])
+		if slice[i] == "(low)" {
+			slice[i-1] = strings.ToLower(slice[i-1])
 			slice = append(slice[:i], slice[i+1:]...)
 			continue
 		}
-		if slice[i] == "(cap," {
+		if slice[i] == "(low," {
 			secondPart := slice[i+1]
 			stringNumber := strings.Split(secondPart, ")")[0]
 			n, err := strconv.Atoi(stringNumber)
@@ -29,13 +29,13 @@ func Cap(str string) string {
 				os.Exit(0)
 			}
 			if n <= 0 {
-				fmt.Println("Number cannot be negative or zero")
-				os.Exit(0)
+				slice = append(slice[:i], slice[i+2:]...)
+				break
 			}
 			if n <= len(slice[:i]) {
 				counter := 0
 				for j := i - 1; counter != n; j-- {
-					slice[j] = strings.Title(slice[j])
+					slice[j] = strings.ToLower(slice[j])
 					counter++
 				}
 				slice = append(slice[:i], slice[i+2:]...)
@@ -43,8 +43,8 @@ func Cap(str string) string {
 				fmt.Println("Wrond numbers to Upper, check it after word: " + slice[i-1])
 				os.Exit(0)
 			}
+
 		}
 	}
-
 	return strings.Join(slice, " ")
 }

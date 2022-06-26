@@ -1,4 +1,4 @@
-package funcUp
+package funcup
 
 import (
 	"fmt"
@@ -29,8 +29,8 @@ func Up(str string) string {
 				os.Exit(0)
 			}
 			if n <= 0 {
-				fmt.Println("Number cannot be negative or zero")
-				os.Exit(0)
+				slice = append(slice[:i], slice[i+2:]...)
+				break
 			}
 			if n <= len(slice[:i]) {
 				counter := 0

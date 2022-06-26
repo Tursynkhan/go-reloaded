@@ -1,20 +1,20 @@
-package funcBin
+package funchex
 
 import (
 	"strconv"
 	"strings"
 )
 
-func Bin(str string) string {
+func Hex(str string) string {
 	slice := strings.Fields(str)
 	for i := 0; i < len(slice); i++ {
 		if len(slice) == 1 {
-			if slice[i] == "(bin)" {
+			if slice[i] == "(hex)" {
 				slice[i] = ""
 			}
 		}
-		if slice[i] == "(bin)" {
-			decimal, _ := strconv.ParseInt(slice[i-1], 2, 64)
+		if slice[i] == "(hex)" {
+			decimal, _ := strconv.ParseInt(slice[i-1], 16, 64)
 
 			slice[i-1] = strconv.Itoa(int(decimal))
 			slice = append(slice[:i], slice[i+1:]...)

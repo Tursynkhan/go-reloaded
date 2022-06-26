@@ -1,14 +1,14 @@
 package main
 
 import (
-	"go-reloaded/Functions/funcArticles"
-	"go-reloaded/Functions/funcBin"
-	"go-reloaded/Functions/funcCap"
-	"go-reloaded/Functions/funcHex"
-	"go-reloaded/Functions/funcLow"
-	"go-reloaded/Functions/funcPunct"
-	"go-reloaded/Functions/funcQuotes"
-	"go-reloaded/Functions/funcUp"
+	"go-reloaded/functions/funcarticles"
+	"go-reloaded/functions/funcbin"
+	"go-reloaded/functions/funccap"
+	"go-reloaded/functions/funchex"
+	"go-reloaded/functions/funclow"
+	"go-reloaded/functions/funcpunct"
+	"go-reloaded/functions/funcquotes"
+	"go-reloaded/functions/funcup"
 	"strings"
 )
 
@@ -20,30 +20,30 @@ func convertText(text string) string {
 	for i := 0; i < len(words); i++ {
 		switch words[i] {
 		case "(up)":
-			text = funcUp.Up(text)
+			text = funcup.Up(text)
 		case "(up,":
-			text = funcUp.Up(text)
+			text = funcup.Up(text)
 		case "(low)":
-			text = funcLow.Low(text)
+			text = funclow.Low(text)
 		case "(low,":
-			text = funcLow.Low(text)
+			text = funclow.Low(text)
 		case "(cap)":
-			text = funcCap.Cap(text)
+			text = funccap.Cap(text)
 		case "(cap,":
-			text = funcCap.Cap(text)
+			text = funccap.Cap(text)
 		case "(hex)":
-			text = funcHex.Hex(text)
+			text = funchex.Hex(text)
 		case "(bin)":
-			text = funcBin.Bin(text)
+			text = funcbin.Bin(text)
 		}
 
 		if isInStrings(words[i], symbols) && isInRunes(rune(words[i][0]), punctuations) {
-			text = funcPunct.Punct(text)
+			text = funcpunct.Punct(text)
 		} else if (words[i] == "a" || words[i] == "A") && isInRunes(rune(words[i+1][0]), vowels) {
-			text = funcArticles.Articles(text)
+			text = funcarticles.Articles(text)
 		} else if words[i] == "'" {
-			text = funcQuotes.SingleQuotes(text)
-			text = funcQuotes.DoubleQuotes(text)
+			text = funcquotes.SingleQuotes(text)
+			text = funcquotes.DoubleQuotes(text)
 		}
 	}
 

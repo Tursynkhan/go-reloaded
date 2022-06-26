@@ -1,4 +1,4 @@
-package funcQuotes
+package funcquotes
 
 import (
 	"strings"
